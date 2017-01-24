@@ -40,25 +40,6 @@ angular.module('starter', ['ionic', 'FilmsModule'])
     }
   })
 
-    .state('app.films', {
-    url: '/films',
-    views: {
-      'content': {
-        templateUrl: 'js/app/films/films.html',
-        controller: 'FilmsController'
-      }
-    }
-  })
-
-  .state('app.films-detail', {
-  url: '/films-detail',
-  views: {
-    'content': {
-      templateUrl: 'js/app/films/films-detail.html'
-    }
-  }
-  })
-  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/about');
 });
