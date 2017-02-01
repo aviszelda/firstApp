@@ -61,7 +61,45 @@ angular.module('OMDBFilmsModule', ['FilmModel'])
 		return deferred.promise;
 	};
 
-	filmsService.getFilms = function () {};
+	filmsService.getFilms = function () {
+		var deferred = $q.defer();
+		if(filmsService.films.length > 0) {
+			deferred.resolve(filmsService.films);
+		} else {
+
+			var nDownloads = 0;
+			var someErrorOcurred = false;
+			var resolveIfFinished = function(success) {
+				nDownloads++;
+				if(!success) {
+					someErrorOcurred = true;
+				}
+				if(nDownloads === filmNames.length) {
+					if(!someErrorOcurred) {
+						deferred.resolve(filmsService.films);
+					} else {
+						deferred.reject;
+					}
+				}
+			}
+
+			var resolveIfFinished = function(success) {};
+
+				for(var i=0; i < filmNames.length; i++) {
+					$http.get(urlFromTitle(filmNames[i]), {}).then (
+					function(response) {
+						filmsService.films.push(Film.build(response.data));
+						resolveIfFinished(true);
+					},
+					function(error) {
+						resolveIfFinished(false);
+					}
+				);
+			}
+		}
+
+		return deferred.promise;
+	};
 
 	return filmsService;
 

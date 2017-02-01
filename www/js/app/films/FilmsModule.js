@@ -1,4 +1,4 @@
-angular.module('FilmsModule', ['FilmModel'])
+angular.module('FilmsModule', ['FilmModel', 'OMDBFilmsModule'])
 
   .config(function($stateProvider) {
   $stateProvider
